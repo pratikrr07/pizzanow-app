@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Checkout</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+    <header class="app-header small">
+        <div class="brand">PizzaNow</div>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="window.location.href='index.html'">← Back</button>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <section class="checkout-left">
+            <h2>Your Order</h2>
+            <div class="card">
+                <ul id="checkout-items" class="menu-list"></ul>
+            </div>
+        </section>
+
+        <aside class="checkout-right">
+            <div class="card">
+                <h3>Summary</h3>
+                <p>Subtotal: $<span id="subtotal">0.00</span></p>
+                <p>Delivery: Free</p>
+                <p>Tax: $<span id="tax">0.00</span></p>
+                <h3 class="total-line">Total: $<span id="total">0.00</span></h3>
+                <button id="place-order" class="checkout-btn" onclick="placeOrder()">Place Order</button>
+                <p id="msg" class="muted small"></p>
+            </div>
+        </aside>
+    </main>
+
+    <script src="checkout.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Build Your Own Pizza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header small">
+    <div class="brand">PizzaNow</div>
+    <div class="header-actions">
+        <button class="icon-btn" onclick="window.location.href='index.html'">← Menu</button>
+    </div>
+</header>
+
+<main class="container build-container">
+    <div class="card">
+    <div id="builder">
+            <div class="builder-row">
+                <label><strong>Size</strong></label>
+                <div id="sizes"></div>
+            </div>
+
+            <div class="builder-row">
+                <label><strong>Crust</strong></label>
+                <select id="crust">
+                    <option value="regular" data-mod="0">Regular</option>
+                    <option value="thin" data-mod="0.5">Thin (+$0.50)</option>
+                    <option value="stuffed" data-mod="2.5">Stuffed (+$2.50)</option>
+                </select>
+            </div>
+
+            <div class="builder-row">
+                <label><strong>Toppings</strong></label>
+                <div id="toppings" class="toppings-grid"></div>
+            </div>
+
+            <div class="builder-row">
+                <label><strong>Quantity</strong></label>
+                <input id="quantity" type="number" value="1" min="1" style="width:80px" />
+            </div>
+
+            <div class="builder-row">
+                <label><strong>Total</strong></label>
+                <div id="total" style="font-weight:800">$0.00</div>
+            </div>
+
+        </div>
+        </div>
+
+    <aside class="card summary-card">
+        <h3 class="summary-title">Order Preview</h3>
+        <div id="preview" class="pizza-card">
+            <img id="preview-img" src="images/build.jpg" />
+            <div class="pizza-info">
+                <h3 id="preview-title">Custom Pizza</h3>
+                <div id="preview-line" class="pizza-price">—</div>
+            </div>
+        </div>
+
+        <div class="summary-details">
+            <div class="summary-row"><span>Quantity</span><strong id="summary-qty">1</strong></div>
+            <div class="summary-row"><span>Subtotal</span><strong id="summary-sub">$0.00</strong></div>
+            <div class="summary-row"><span>Tax</span><strong id="summary-tax">$0.00</strong></div>
+            <div class="summary-row total"><span>Total</span><strong id="summary-total">$0.00</strong></div>
+        </div>
+
+        <div style="margin-top:12px">
+            <button id="add-to-cart" class="checkout-btn" style="width:100%">Add to Cart</button>
+            <p id="builder-msg" class="muted small" style="margin-top:8px"></p>
+        </div>
+    </aside>
+</main>
+
+<script src="build.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Recommended: use the VS Code "Live Server" extension to serve the frontend (right-click index.html -> Open with Live Server) -->
+    <meta charset="UTF-8">
+    <title>Food Ordering App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+</head>
+<body>
+
+<header class="app-header">
+    <div class="brand">PizzaNow</div>
+    <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search pizzas, e.g. pepperoni" />
+    </div>
+    <div class="header-actions">
+        <button class="icon-btn" onclick="window.location.href='checkout.html'">
+            🛒 <span id="cart-count" class="badge">0</span>
+        </button>
+    </div>
+</header>
+
+<main class="container">
+    <section class="menu-column">
+        <div class="card">
+            <div class="card-header">
+                <h2>Menu</h2>
+                <small class="muted">Tap + to add</small>
+            </div>
+            <!-- Headliner: Build Your Own (fancier) -->
+            <a class="build-headliner" href="build.html" aria-label="Build your own pizza">
+                <div class="headliner-overlay">
+                    <div class="headliner-text">
+                        <div class="kicker">Special</div>
+                        <h2>Build Your Own Pizza</h2>
+                        <p class="muted">Craft your perfect pizza — select size, crust & toppings.</p>
+                        <div class="headliner-cta">
+                            <button class="checkout-btn">Create Yours</button>
+                            <div class="start-price">From <strong>$9.99</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <img src="images/build.jpg" alt="Build Your Own Pizza" class="headliner-img" />
+            </a>
+
+            <div id="menu-items" class="menu-grid"></div>
+        </div>
+    </section>
+
+    <aside class="cart-column">
+        <div class="card sticky-cart">
+            <div class="card-header">
+                <h2>Your Cart</h2>
+            </div>
+            <ul id="cart-items" class="cart-list"></ul>
+            <div class="cart-footer">
+                <div class="cart-total">Total: <strong>$<span id="total-price">0.00</span></strong></div>
+                <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            </div>
+            <p id="order-msg" class="muted small"></p>
+        </div>
+    </aside>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
