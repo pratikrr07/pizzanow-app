@@ -1,3 +1,7 @@
+"""PizzaNow Backend API
+A Flask-based REST API for a food ordering application.
+Provides endpoints for menu retrieval, cart management, and checkout processing.
+"""
 from flask import Flask, jsonify, request
 import uuid
 from flask_cors import CORS
@@ -5,7 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Sample menu data
+# Sample menu data - available pizzas with pricing
 menu = [
     {
         "id": 1,
@@ -41,7 +45,7 @@ menu = [
 
 
 
-# In-memory cart
+# In-memory shopping cart - cleared on checkout
 cart = []
 
 @app.route("/")
@@ -50,10 +54,12 @@ def home():
 
 @app.route("/menu", methods=["GET"])
 def get_menu():
+    """Retrieve the full menu of available pizzas."""
     return jsonify(menu)
 
 @app.route("/cart", methods=["GET"])
 def get_cart():
+    """Retrieve the current cart contents and total price."""
     total = sum(item["price"] * item["quantity"] for item in cart)
     return jsonify({
         "cart": cart,
@@ -62,10 +68,11 @@ def get_cart():
 
 @app.route("/cart/add", methods=["POST"])
 def add_to_cart():
+    """Add a menu item to cart. Increases quantity if already exists."""
     data = request.get_json()
     item_id = data.get("item_id")
     quantity = int(data.get("quantity", 1) or 1)
-    # accept numeric ids sent as strings
+    # Accept numeric IDs sent as strings from frontend
     try:
         if isinstance(item_id, str) and item_id.isdigit():
             item_id = int(item_id)
@@ -154,6 +161,7 @@ def add_custom_to_cart():
 
 @app.route("/cart/remove", methods=["POST"])
 def remove_from_cart():
+    """Remove or decrease quantity of an item from cart."""
     data = request.get_json()
     item_id = data.get("item_id")
     dec = int(data.get('quantity', 1) or 1)
@@ -169,6 +177,7 @@ def remove_from_cart():
 
 @app.route("/checkout", methods=["POST"])
 def checkout():
+    """Process order: calculate totals, clear cart, and return receipt."""
     if not cart:
         return jsonify({"error": "Cart is empty"}), 400
 
@@ -176,7 +185,8 @@ def checkout():
     tax = round(subtotal * 0.18, 2)
     total = round(subtotal + tax, 2)
 
-    cart.clear()  # clear cart after order
+    # Clear cart after order is placed
+    cart.clear()
 
     return jsonify({
         "message": "Order placed successfully!",

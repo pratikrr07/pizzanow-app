@@ -1,11 +1,17 @@
+/**
+ * PizzaNow Frontend - Build Your Own Pizza Module
+ * Custom pizza builder with size, crust, and toppings selection
+ */
 const API_URL = "http://127.0.0.1:5000";
 
+// Available pizza sizes and prices
 const sizes = [
     { id: 'small', label: 'Small', price: 9.99 },
     { id: 'medium', label: 'Medium', price: 12.99 },
     { id: 'large', label: 'Large', price: 15.99 }
 ];
 
+// Available pizza toppings with pricing
 const toppings = [
     { id: 'pepperoni', label: 'Pepperoni', price: 1.5 },
     { id: 'mushrooms', label: 'Mushrooms', price: 1.0 },
@@ -17,8 +23,10 @@ const toppings = [
     { id: 'olives', label: 'Olives', price: 0.9 }
 ];
 
+// Format price values to currency string
 function format(v){return '$' + v.toFixed(2)}
 
+// Initialize pizza builder UI with size, crust, and topping options
 function renderBuilder(){
     const sizesDiv = document.getElementById('sizes');
     sizesDiv.innerHTML = '';
@@ -52,6 +60,7 @@ function renderBuilder(){
     updateTotal();
 }
 
+// Recalculate pizza price based on selections and update preview
 function updateTotal(){
     const selectedSize = document.querySelector('input[name="size"]:checked');
     const sizePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 0;
@@ -78,6 +87,7 @@ function updateTotal(){
     document.getElementById('summary-total').textContent = format((sizePrice + crustMod + toppingsTotal) * qty + tax);
 }
 
+// Create custom pizza payload and add to cart via API
 function addCustomToCart(){
     const qty = Math.max(1, parseInt(document.getElementById('quantity').value || 1));
     const selectedSize = document.querySelector('input[name="size"]:checked');

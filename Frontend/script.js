@@ -1,5 +1,10 @@
+/**
+ * PizzaNow Frontend - Main Menu Module
+ * Handles menu display, search, cart management, and checkout
+ */
 const API_URL = "http://127.0.0.1:5000";
 
+// Load and display menu items from the backend API
 function loadMenu() {
     const q = (document.getElementById('search') || {}).value || '';
     fetch(`${API_URL}/menu`)
@@ -29,6 +34,7 @@ function loadMenu() {
 }
 
 
+// Add a menu item to the shopping cart
 function addToCart(itemId) {
     fetch(`${API_URL}/cart/add`, {
         method: "POST",
@@ -37,6 +43,7 @@ function addToCart(itemId) {
     }).then(() => loadCart());
 }
 
+// Fetch and render current cart contents
 function loadCart() {
     fetch(`${API_URL}/cart`)
         .then(res => res.json())
@@ -74,6 +81,7 @@ function loadCart() {
         });
 }
 
+// Remove item completely from cart
 function removeItem(itemId, qty){
     // remove entire item by sending quantity equal to current qty
     fetch(`${API_URL}/cart/remove`, {
@@ -82,6 +90,7 @@ function removeItem(itemId, qty){
     }).then(()=> loadCart());
 }
 
+// Update item quantity by adding or removing one unit
 function updateQty(itemId, action) {
     const endpoint = action === "add" ? "/cart/add" : "/cart/remove";
 
@@ -92,6 +101,7 @@ function updateQty(itemId, action) {
     }).then(() => loadCart());
 }
 
+// Process checkout and clear cart on success
 function checkout() {
     fetch(`${API_URL}/checkout`, {
         method: "POST"

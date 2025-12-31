@@ -1,5 +1,10 @@
+/**
+ * PizzaNow Frontend - Checkout Module
+ * Displays order summary, pricing details, and processes payment
+ */
 const API_URL = "http://127.0.0.1:5000";
 
+// Map pizza names to images for display
 function getImageForName(name) {
     const key = (name || '').toLowerCase();
     if (key.includes('pepper')) return 'images/pepperoni.jpg';
@@ -10,6 +15,7 @@ function getImageForName(name) {
     return 'images/margherita.jpg';
 }
 
+// Fetch cart and display order items with pricing breakdown
 function refreshCheckout() {
     fetch(`${API_URL}/cart`)
     .then(res => res.json())
@@ -58,6 +64,7 @@ function refreshCheckout() {
 
 document.addEventListener('DOMContentLoaded', refreshCheckout);
 
+// Submit order to backend and redirect to menu on success
 function placeOrder() {
     const btn = document.getElementById('place-order');
     if (btn) btn.disabled = true;
