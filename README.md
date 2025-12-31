@@ -57,5 +57,3 @@ Extending the project
 - Add user accounts and order history
 - Add payment integration for real checkout
 
-License
-- This demo is provided as-is for learning and prototyping.
